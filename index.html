@@ -110,16 +110,19 @@
             if (window.DeviceMotionEvent != undefined) {
                 window.ondevicemotion = function(e) {
                 
-                    var x =Math.ceil(Math.abs(e.accelerationIncludingGravity.x));
-                    var y =Math.ceil(Math.abs(e.accelerationIncludingGravity.y));
-                    var z =Math.ceil(Math.abs(e.accelerationIncludingGravity.z));
+                    var x =e.accelerationIncludingGravity.x;
+                    var y =e.accelerationIncludingGravity.y;
+                    var z =e.accelerationIncludingGravity.z;
+                    // var x =Math.ceil(Math.abs(e.accelerationIncludingGravity.x));
+                    // var y =Math.ceil(Math.abs(e.accelerationIncludingGravity.y));
+                    // var z =Math.ceil(Math.abs(e.accelerationIncludingGravity.z));
                     document.getElementById("accelerationX").innerHTML = x
                     document.getElementById("accelerationY").innerHTML = y
                     // document.getElementById("accelerationZ").innerHTML = z
                     
                     if(x>1 || y>1 || z<9){
                         const pie = document.querySelector('#pie')
-                        pie.style.transform = `rotate(${y*20}deg)`
+                        pie.style.transform = `rotate(${y+5}deg)`
                         pie.style.transition = `all .3s ease-in-out`
                         document.getElementById("accelerationZ").innerHTML = 'Pie is working'
 
