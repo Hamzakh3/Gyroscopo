@@ -6,6 +6,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: auto;
+            min-height: 100px;
+            background-color: whitesmoke;
+            position: relative;
+        }
+
+        .blankCircle {
+            width: 45px;
+            height: 45px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50px;
+            background: whitesmoke
+        }
+        .backCircle {
+            width: 120px;
+            height: 120px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50px;
+            background: linear-gradient(90deg, rgba(101,116,201,1) 0%, rgba(235,195,110,1) 33%, rgba(3,149,213,1) 66%, rgba(238,125,121,1) 100%);    
+        }
+
+        svg {
+            height: 120px;
+            width: 120px;
+        }
+
+        .splitor {
+            fill: url(#grad1);
+            /* fill: #37afff; */
+            stroke: whitesmoke;
+            stroke-width: 5px;
+            transition: .2s all ease-in-out;
+        }
+
+        .splitorActive {
+            fill: #008deb !important;
+            stroke: whitesmoke !important;
+            /* stroke-width: 1px; */
+            transition: .2s all ease-in-out;
+        }
+
+        path {
+            fill: white;
+            stroke: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,6 +84,21 @@
             <li>acceleration y: <span id="accelerationY"></span></li>
             <li>acceleration z: <span id="accelerationZ"></span></li>
         </ul>
+
+        <div class="container">
+            <div class="blankCircle"></div>
+            <!-- <div class="backCircle"></div> -->
+            <svg viewBox="0 0 90 90" id="pie">
+                <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color: #6574C9;stop-opacity:1" />
+                        <stop offset="34%" style="stop-color:#7AE0D2;stop-opacity:1" />
+                        <stop offset="66%" style="stop-color:#EBC36E;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#EE7D79;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+            </svg>
+        </div>
     </div>
 
     <script>
@@ -35,19 +107,25 @@
             if (window.DeviceMotionEvent != undefined) {
                 window.ondevicemotion = function(e) {
                 
-                    var x =Math.abs(e.accelerationIncludingGravity.x);
-                    var y =Math.abs(e.accelerationIncludingGravity.y);
-                    var z =Math.abs(e.accelerationIncludingGravity.z);
+                    var x =Math.ceil(Math.abs(e.accelerationIncludingGravity.x));
+                    var y =Math.ceil(Math.abs(e.accelerationIncludingGravity.y));
+                    var z =Math.ceil(Math.abs(e.accelerationIncludingGravity.z));
                     document.getElementById("accelerationX").innerHTML = x
                     document.getElementById("accelerationY").innerHTML = y
-                    document.getElementById("accelerationZ").innerHTML = z
+                    // document.getElementById("accelerationZ").innerHTML = z
                     
                     if(x>1 || y>1 || z<9){
+                        const pie = document.querySelector('#pie')
+                        pie.style.transform = `rotate(${x}deg)`
+                        document.getElementById("accelerationZ").innerHTML = 'Pie is working'
+
                     // alert("ok");
                     }
                 };
 
             }
+
+            
 
         // const ul = document.querySelector(".values")
         // const p = document.querySelector(".value")
