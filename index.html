@@ -120,6 +120,7 @@
                     if(x>1 || y>1 || z<9){
                         const pie = document.querySelector('#pie')
                         pie.style.transform = `rotate(${y*20}deg)`
+                        pie.style.transition = `all .3s ease-in-out`
                         document.getElementById("accelerationZ").innerHTML = 'Pie is working'
 
                     // alert("ok");
