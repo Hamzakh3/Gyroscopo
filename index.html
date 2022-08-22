@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Gyroscope Values</h1>
+    <!-- <ul class="values">
+        <li>Absolute</li>
+        <li>Alpha</li>
+        <li>Beta</li>
+        <li>Gamma</li>
+    </ul>
+    <p class="value">
+
+    </p> -->
+    <div id="content">
+        <h1>Accelerometer Javascript Test</h1>
+        <div id="sphere" style="top: 0px; left: 0px;"></div>
+        <ul>
+            <li>acceleration x: <span id="accelerationX"></span></li>
+            <li>acceleration y: <span id="accelerationY"></span></li>
+            <li>acceleration z: <span id="accelerationZ"></span></li>
+        </ul>
+    </div>
+
+    <script>
+                var sphere = document.getElementById("sphere");
+
+            if (window.DeviceMotionEvent != undefined) {
+                window.ondevicemotion = function(e) {
+                
+                    var x =Math.abs(e.accelerationIncludingGravity.x);
+                    var y =Math.abs(e.accelerationIncludingGravity.y);
+                    var z =Math.abs(e.accelerationIncludingGravity.z);
+                    document.getElementById("accelerationX").innerHTML = x
+                    document.getElementById("accelerationY").innerHTML = y
+                    document.getElementById("accelerationZ").innerHTML = z
+                    
+                    if(x>1 || y>1 || z<9){
+                    alert("ok");
+                    }
+                };
+
+            }
+
+        // const ul = document.querySelector(".values")
+        // const p = document.querySelector(".value")
+        // console.log(ul);
+        // navigator.permissions.query({ name: 'gyroscope' }).then((result) => {
+        //     if (result.state === 'granted') {
+        //         showLocalNewsWithGeolocation();
+        //     } else if (result.state === 'prompt') {
+        //         showButtonToEnableLocalNews();
+        //     }
+        //     // Don't do anything if the permission was denied.
+        // });
+
+        // function showLocalNewsWithGeolocation() {
+
+        // }
+
+        // let gyroscope = new GravitySensor({ frequency: 60 });
+        //     console.log(gyroscope);
+      
+        // gyroscope.addEventListener('reading', (e) => {
+        //     p.innerHTML = 'Gyroscope Working'
+        //     console.log('Hamza');
+        //     console.log(`Angular velocity along the X-axis ${gyroscope.x}`);
+        //     console.log(`Angular velocity along the Y-axis ${gyroscope.y}`);
+        //     console.log(`Angular velocity along the Z-axis ${gyroscope.z}`);
+
+        //     // <li>absolute ${absolute}</li>
+        //     ul.innerHTML = `
+        //         <li>alpha ${gyroscope.x}</li>
+        //         <li>beta ${gyroscope.y}</li>
+        //         <li>gamma${gyroscope.z}</li>
+        //     `
+        // });
+        // gyroscope.start();
+
+       
+
+    </script>
+</body>
+
+</html>
