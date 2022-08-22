@@ -102,7 +102,10 @@
     </div>
 
     <script>
-                var sphere = document.getElementById("sphere");
+            
+
+            
+            var sphere = document.getElementById("sphere");
 
             if (window.DeviceMotionEvent != undefined) {
                 window.ondevicemotion = function(e) {
@@ -163,6 +166,59 @@
         // gyroscope.start();
 
        
+
+    </script>
+
+    <script>
+        var fromAngle, toAngle,
+    fromCoordX, fromCoordY,
+    toCoordX, toCoordY,
+    path, d;
+
+function createPie(cx, cy, r, slices, space, id) {
+    for (var i = 0; i < slices; i++) {
+        path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+
+        if (id) {
+            path.setAttribute("id", "split" + (i + 1))
+            path.classList.add(id)
+        }
+
+        fromAngle = (i * 360 / slices);
+        // console.log({fromAngle});
+        toAngle = ((i + 1) * 360 / slices) - space;
+        console.log(toAngle);
+        //console.log(fromAngle + ' ' + toAngle);
+        fromCoordX = cx + (r * Math.cos(fromAngle * Math.PI / 180));
+        fromCoordY = cy + (r * Math.sin(fromAngle * Math.PI / 180));
+        toCoordX = cx + (r * Math.cos(toAngle * Math.PI / 180));
+        toCoordY = cy + (r * Math.sin(toAngle * Math.PI / 180));
+
+        //console.log(fromCoord + ' ' + toCoord);
+        d = 'M' + cx + ',' + cy + ' L' + fromCoordX + ',' + fromCoordY + ' A' + r + ',' + r + ' 0 0,1 ' + toCoordX + ',' + toCoordY + 'z';
+        //console.log(d);
+        path.setAttributeNS(null, "d", d);
+        document.getElementById('pie').appendChild(path);
+
+    }
+    const splitor = document.querySelectorAll(".splitor")
+    console.log(splitor);
+    splitor.forEach((elem) => {
+        elem.addEventListener("click", (e) => {
+            showActiveSplitor(splitor)
+            e.target.id === elem.id && elem.classList.add("splitorActive");
+            
+            //  && e.target.classList.add('splitorActive')
+        })
+    })
+    
+    return true
+}
+
+const showActiveSplitor = (splits) => splits.forEach(e => e.classList.remove("splitorActive") )
+    
+createPie(45, 45, 40, 5, 0, "splitor");
+// createPie(45, 45, 20, 2, 0);
 
     </script>
 </body>
